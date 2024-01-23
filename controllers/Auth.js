@@ -143,7 +143,7 @@ exports.singUp =  async (req, res) => {
     }
 
     //Hash Password
-    const hashedPasswod = await bcrypt.hash(password, 100);
+    const hashedPasswod = await bcrypt.hash(password, 10);
    
   //create profile  in DB
    const ProfileDetails = await Profile.create({
