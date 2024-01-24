@@ -1,5 +1,5 @@
 const Course = require("../models/Course");
-const Tag = require("../models/tags");
+const Category = require("../models/Category");
 const User = require("../models/User");
 const {uploadImageToCloudinary} = require("../utils/imageUploader");
 
@@ -7,14 +7,14 @@ const {uploadImageToCloudinary} = require("../utils/imageUploader");
 exports.createCourse = async (req, res) => {
     try{
         //fetch data 
-        const {courseName, courseDescription, whatYouWilLern, price, tag} = req.body;
+        const {courseName, courseDescription, whatYouWilLern, price, Category} = req.body;
 
         //get thumbnail
         const thumbnail = req.files.thumbnailImage;
 
         //validation
 
-        if(!courseName || !courseDescription || !whatYouWilLern || !price  || !tag || !thumbnail) {
+        if(!courseName || !courseDescription || !whatYouWilLern || !price  || !Category || !thumbnail) {
             return res.status(400).json({
                 success:false,
                 message:"All Fields are required"
@@ -33,11 +33,11 @@ exports.createCourse = async (req, res) => {
             })
         }
         //check givent ag is valid or not
-        const tagDetalis = await Tag.findById(tag);
-        if(!tag) {
+        const CategoryDetalis = await Category.findById(Category);
+        if(!Category) {
             return res.status(404).json({
                 success:false,
-                message:"Tag Detalis not found",
+                message:"Category Detalis not found",
             })
         }
 
@@ -52,7 +52,7 @@ exports.createCourse = async (req, res) => {
             instructor:instructorDeatils._id,
             whatYouWillLearn:whatYouWilLern,
             price,
-            tag:tagDetalis._id,
+            Category:CategoryDetalis._id,
             thumbnail:thumbnailImage.secure_url,
 
        
@@ -71,7 +71,7 @@ exports.createCourse = async (req, res) => {
             
          );
          //Todo
-         //update the Tag schema
+         //update the Category schema
          
 
          //return response
