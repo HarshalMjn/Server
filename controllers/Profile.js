@@ -44,7 +44,7 @@ exports.updateProfile = async (req, res) => {
 
 
 //deleteAccount
-//Explore -> how can we schedule this deletion operation
+//Explore -> how can we schedule this deletion operation google- (cromjob)
 exports.deleteAccount = async (req, res) => {
     try{
         //get id 
