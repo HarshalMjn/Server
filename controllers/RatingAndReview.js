@@ -56,7 +56,7 @@ exports.createRating = async (req,res) => {
     return res.status(200).json({
         success:true,
         message:"Rating and Review created Successfully",
-        ratingReview,
+        ratingAndReviews,
     })
 
 
@@ -94,7 +94,7 @@ exports.getAverageRating = async (req, res) => {
         ])
         //return rating
         if(result.length > 0) {
-             return status.res(200).json({
+             return res.status(200).json({
                 success:true,
                 averageRating: result[0].averageRating,
              })

@@ -42,7 +42,7 @@ exports.showAllCategorys = async (req,res) => {
         const allCategorys = await Category.find({}, {name:true,description:true});
         res.status(200).json({
             success:true,
-            message:"ALlm Category return successfully",
+            message:"All Category return successfully",
             allCategorys,
         })
     } catch(error) {
@@ -53,3 +53,57 @@ exports.showAllCategorys = async (req,res) => {
 
     }
 };
+
+//categorypageDetails
+
+exports.CategoryPageDetalis = async (req,res) => {
+    try{
+        //get categoryId
+        const {categoryId} = req.body;
+        //get courses for specified categoryId
+        const selectedCategory = await Category.findById(categoryId)
+                                        .populate("courses")
+                                        .exec();
+        //validation
+        if(!selectedCategory) {
+            return res.status(404).json({
+                success:false,
+                message:"Data Not Found",
+            })
+        }
+        //get courses for differnet catgories
+        const differnetCategories = await Category.find({
+                                    _id:{$ne: categoryId},
+                                    })
+                                    .populate("courses")
+                                    .exec();
+        
+        //get top 10 selling courses
+        //find max num for studentEnlloed in which course 
+        const topSellingCourse = await Course.find({})
+                                 .sort({studentsEnrolled:-1})
+                                 .limit(10)
+                                 .populate("courses")
+                                .exec();
+        
+        
+
+        //return response
+        return res.status(200).json({
+            success:true,
+            data: {
+                selectedCategory,
+                differnetCategories,
+                topSellingCourse
+            }
+        })
+
+    } 
+    catch(error) {
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:error.message,
+        });
+    }
+}
