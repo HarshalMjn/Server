@@ -78,7 +78,6 @@ exports.deleteAccount = async (req, res) => {
     }
 };
 
-
 exports.getAllUserDetails = async (req, res) => {
 
     try {
@@ -100,4 +99,11 @@ exports.getAllUserDetails = async (req, res) => {
             message:error.message,
         });
     }
-}
+};
+
+//updateDisplayPicture
+
+//getEnrolledCourses
+
+
+

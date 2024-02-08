@@ -4,7 +4,7 @@ const { uploadImageToCloudinary } = require("../utils/imageUploader");
 
 //create subsection
 
-exports.createSubsection = async (req,res) => {
+exports.createSubSection = async (req,res) => {
     try{
         //fetch data from Req body
         const { SectionId, title, timeDuration, description} = req.body;
@@ -30,8 +30,10 @@ exports.createSubsection = async (req,res) => {
                                                                {$push:{
                                                                 subSection:subSectionDetails._id,
                                                                }},
-                                                               {new:true});
+                                                               {new:true})
+                                                               .populate("subSection")
         //TODO log update ssection here, after adding populate query
+          
         //retunr res
         return res.status(200).json({
             success:true,
@@ -94,7 +96,7 @@ exports.updateSubSection = async (req, res) => {
     }
   }
 
-  exports.deleteSubSection = async (req, res) => {
+  exports.deleteSubSection  = async (req, res) => {
     try {
       const { subSectionId, sectionId } = req.body
       await Section.findByIdAndUpdate(

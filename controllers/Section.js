@@ -26,6 +26,13 @@ exports.createSection = async (req,res) => {
                                         {new:true},
                                     )
         //Todo: use populate to replace section/subections both in the updateCourseDeatils(course conetn mndy sectiona  and subscetion id nhi hvi object hva)
+                                .populate({
+                                    path: "courseContent",
+				                    populate: {
+					                path: "subSection",
+				                    },
+                                })  
+                                .exec();
         //return response
         return res.status(200).json({
             success:true,
@@ -59,9 +66,9 @@ exports.updateSection = async (req,res) => {
 
         //return res
         return res.status(200).json({
-            success:false,
-            message:"Section Updated Successfully",
-        })
+            success:true,
+            message: section,
+        });
 
 
     } catch(error) {
