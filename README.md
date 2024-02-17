@@ -1,4 +1,4 @@
-# Study Notion An ED-Tech Platform
+# Study Notion An ED-Tech Platform BackEnd
 
 StudyNotion is an educational technology platform aimed at providing an immersive and interactive learning experience for students and a platform for instructors to showcase their expertise.
 
