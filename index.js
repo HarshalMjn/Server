@@ -45,10 +45,11 @@ app.use("/api/v1/payment", paymentRoutes);
 
 
 //def route
+
 app.get("/", (req, res) => {
 	return res.json({
 		success:true,
-		message:`Your server is up and running....${PORT}`
+		message:'Your server is up and running....'
 	});
 });
 

@@ -1,29 +1,23 @@
 const express = require("express")
-const router =  express.Router()
-
+const router = express.Router()
 const { auth } = require("../middlewares/auth")
-
-const { 
-
-    updateProfile ,
-    deleteAccount,
-    getAllUserDetails,
-    getEnrolledCourses,
-    updateDisplayPicture,
-
+const {
+  deleteAccount,
+  updateProfile,
+  getAllUserDetails,
+  updateDisplayPicture,
+  getEnrolledCourses,
 } = require("../controllers/Profile")
-
 
 // ********************************************************************************************************
 //                                      Profile routes
 // ********************************************************************************************************
-router.post("/updateProfile", auth, updateProfile)
-router.delete("/deleteAccount", auth, deleteAccount)
-router.get("/getAlluserDetails", auth, getAllUserDetails)
-
-//// Get Enrolled Courses
+// Delet User Account
+router.delete("/deleteProfile", auth, deleteAccount)
+router.put("/updateProfile", auth, updateProfile)
+router.get("/getUserDetails", auth, getAllUserDetails)
+// Get Enrolled Courses
 router.get("/getEnrolledCourses", auth, getEnrolledCourses)
-///updateDisplayPicture
 router.put("/updateDisplayPicture", auth, updateDisplayPicture)
-///updateDisplayPicture
+
 module.exports = router
